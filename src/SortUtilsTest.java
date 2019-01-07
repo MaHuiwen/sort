@@ -8,7 +8,7 @@ public class SortUtilsTest {
 
     @Test
     public void sortTest() {
-        int i = 100;
+        int i = 1000;
         while (i-- > 0) {
             long[] arrRandom = SortUtils.createRandomArray(10, 0, 50);
             //打印测试数据
@@ -18,7 +18,7 @@ public class SortUtilsTest {
             }
             System.out.println();
             //打印排序结果
-            SortUtils.insertionSort(arrRandom);
+            SortUtils.mergeSort(arrRandom);
             System.out.print("第" + i + "组排序结果" + ": ");
             for (long r : arrRandom) {
                 System.out.print(r + " ");

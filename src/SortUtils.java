@@ -47,6 +47,71 @@ public class SortUtils {
     }
 
     /**
+     * 选择排序
+     */
+    public static void selectionSort(long[] arr) {
+        int length = arr.length;
+        for (int i = 0; i < length; i++) {
+            long max = arr[i];
+            int loc = i;
+            for (int j = i+1; j < length; j++) {
+                if (arr[j] > max) {
+                    max = arr[j];
+                    loc = j;
+                }
+            }
+            arr[loc] = arr[i];
+            arr[i] = max;
+        }
+    }
+
+    /**
+     * 归并排序
+     */
+    public static void mergeSort(long[] arr) {
+        mergeSortPartArray(arr, 0, arr.length-1);
+    }
+
+    private static void mergeSortPartArray(long[] arr, int start, int end) {
+        if (start < end) {
+            int mid = (start + end) / 2;
+            mergeSortPartArray(arr, start, mid);
+            mergeSortPartArray(arr, mid+1, end);
+            //将arr[start]-arr[mid]与arr[mid+1]-arr[end]进行合并
+            int i = start;
+            int j = mid + 1;
+            long[] tmp = new long[end-start+1];
+            int k = 0;
+            while (i <= mid && j <= end) {
+                if (arr[i] >= arr[j]) {
+                    tmp[k] = arr[i];
+                    i++;
+                } else {
+                    tmp[k] = arr[j];
+                    j++;
+                }
+                k++;
+            }
+            while (i <= mid) {
+                tmp[k] = arr[i];
+                k++;
+                i++;
+            }
+            while (j <= end) {
+                tmp[k] = arr[j];
+                k++;
+                j++;
+            }
+            //将tmp复制到arr
+            int s = start;
+            for (long t : tmp) {
+                arr[s] = t;
+                s++;
+            }
+        }
+    }
+
+    /**
      * 随机生成数组
      * @param length 数组的长度
      * @param min 最小值
