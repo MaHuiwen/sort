@@ -71,7 +71,6 @@ public class SortUtils {
     public static void mergeSort(long[] arr) {
         mergeSortPartArray(arr, 0, arr.length-1);
     }
-
     private static void mergeSortPartArray(long[] arr, int start, int end) {
         if (start < end) {
             int mid = (start + end) / 2;
@@ -110,6 +109,48 @@ public class SortUtils {
             }
         }
     }
+
+    /**
+     * 快速排序
+     */
+    public static void quickSort(long[] arr) {
+        int low = 0;
+        int high = arr.length - 1;
+        qSort(arr, low, high);
+
+    }
+    private static void qSort(long[] arr, int low, int high) {
+        if (low >= high) return;
+        //选取三个数中的中位数作为基准值
+        swapMidNumber(arr, low, high);
+        long n = arr[low];
+        int i = low;
+        int j = high;
+        while (i < j) {
+            while (arr[j] <= n && i < j) j--;
+            if (arr[j] > n) arr[i++] = arr[j];
+            while (arr[i] >= n && j > i) i++;
+            if (arr[i] < n) arr[j--] = arr[i];
+        }
+        arr[i] = n;
+        qSort(arr, low, i-1);
+        qSort(arr, i+1, high);
+    }
+    private static void swapMidNumber(long[] arr, int low, int high) {
+        int mid = (low + high) / 2;
+        long a = arr[low];
+        long b = arr[mid];
+        long c = arr[high];
+        if ((b>a && b<c) || (b<a && b>c)) {
+            arr[low] = b;
+            arr[mid] = a;
+        }
+        if ((c>a && c<b) || (c<a && c>b)) {
+            arr[low] = c;
+            arr[mid] = a;
+        }
+    }
+
 
     /**
      * 随机生成数组
