@@ -147,7 +147,7 @@ public class SortUtils {
         }
         if ((c>a && c<b) || (c<a && c>b)) {
             arr[low] = c;
-            arr[mid] = a;
+            arr[high] = a;
         }
     }
 
